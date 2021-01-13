@@ -612,6 +612,9 @@ if __name__ == "__main__":
 
     if cfg.use_darknet_cfg:
         model = Darknet(cfg.cfgfile)
+        if cfg.pretrained:
+            model.load_weights(cfg.pretrained)
+
     else:
         model = Yolov4(cfg.pretrained, n_classes=cfg.classes)
 
