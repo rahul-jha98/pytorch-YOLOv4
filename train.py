@@ -617,7 +617,10 @@ if __name__ == "__main__":
 
     else:
         model = Yolov4(cfg.pretrained, n_classes=cfg.classes)
-
+        if cfg.load:
+          pretrained_dict = torch.load(cfg.load, map_location=torch.device('cuda'))
+          model.load_state_dict(pretrained_dict)
+          
     if torch.cuda.device_count() > 1:
         model = torch.nn.DataParallel(model)
     model.to(device=device)
